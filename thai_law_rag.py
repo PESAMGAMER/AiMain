@@ -10,7 +10,7 @@ from flask import Flask, request, render_template, jsonify
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
 OLLAMA_MODEL = "llama3.2"
-FOLDER_PATH = "data"
+FOLDER_PATHS = ["data", "data_family"]
 INDEX_PATH = "faiss.index"
 TEXTS_PATH = "texts.json"
 
@@ -23,18 +23,23 @@ def load_laws(filepath: str) -> List[str]:
     texts = [f"{law['law_name']} มาตรา {law['section_num']}:\n{law['section_content']}" for law in data]
     return texts
 
-def load_laws_from_folder(folder_path: str) -> List[str]:
+def load_laws_from_folders(folder_paths: List[str]) -> List[str]:
     all_texts = []
-    print(f"📚 โหลดไฟล์กฎหมายจากโฟลเดอร์ {folder_path}")
-    for filename in os.listdir(folder_path):
-        if filename.endswith('.json'):
-            file_path = os.path.join(folder_path, filename)
-            try:
-                texts = load_laws(file_path)
-                all_texts.extend(texts)
-                print(f"✓ โหลด {filename} สำเร็จ ({len(texts)} มาตรา)")
-            except Exception as e:
-                print(f"✗ ไม่สามารถโหลด {filename}: {str(e)}")
+    for folder_path in folder_paths:
+        if not os.path.exists(folder_path):
+            print(f"✗ ไม่พบโฟลเดอร์ {folder_path}")
+            continue
+            
+        print(f"📚 โหลดไฟล์กฎหมายจากโฟลเดอร์ {folder_path}")
+        for filename in os.listdir(folder_path):
+            if filename.endswith('.json'):
+                file_path = os.path.join(folder_path, filename)
+                try:
+                    texts = load_laws(file_path)
+                    all_texts.extend(texts)
+                    print(f"✓ โหลด {filename} สำเร็จ ({len(texts)} มาตรา)")
+                except Exception as e:
+                    print(f"✗ ไม่สามารถโหลด {filename}: {str(e)}")
     return all_texts
 
 def embed_chunks(texts: List[str], batch_size: int = 16) -> np.ndarray:
@@ -115,7 +120,7 @@ if __name__ == "__main__":
         with open(TEXTS_PATH, "r", encoding="utf-8") as f:
             texts = json.load(f)
     else:
-        texts = load_laws_from_folder(FOLDER_PATH)
+        texts = load_laws_from_folders(FOLDER_PATHS)  # เปลี่ยนเป็นใช้ฟังก์ชันใหม่
         if not texts:
             print("❌ ไม่พบข้อมูลกฎหมายในโฟลเดอร์")
             exit(1)
