@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบถาม-ตอบกฎหมายไทย</title>
+    <title>ระบบถาม-ตอบกฎหมายทั่วไปและครอบครัว</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="min-h-screen bg-gray-50">
+<body class="min-h-screen bg-pink-50">
     <div class="container mx-auto px-2 sm:px-4 py-4 sm:py-8 max-w-4xl">
         <!-- Header -->
         <header class="mb-6 sm:mb-10 text-center">
             <div class="flex items-center justify-center mb-3 sm:mb-4">
                 <i class="fas fa-balance-scale legal-icon text-3xl sm:text-4xl mr-2 sm:mr-3"></i>
-                <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">ระบบถาม-ตอบเกี่ยวกับกฎหมายไทย</h1>
+                <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">ระบบถาม-ตอบกฎหมายทั่วไปและครอบครัว</h1>
             </div>
-            <p class="text-sm sm:text-base text-gray-600">สอบถามข้อสงสัยทางกฎหมายไทย และรับคำตอบที่ถูกต้องจากระบบของเรา</p>
+            <p class="text-sm sm:text-base text-gray-600">สอบถามข้อสงสัยเกี่ยวกับกฎหมายทั่วไปและกฎหมายครอบครัวไทย</p>
         </header>
 
         <!-- Main Content -->
@@ -24,8 +24,8 @@
             <div class="p-4 sm:p-6 border-b border-gray-200">
                 <div class="flex items-start space-x-2 sm:space-x-3">
                     <div class="flex-shrink-0 hidden sm:block">
-                        <div class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                            <i class="fas fa-question text-blue-500"></i>
+                        <div class="h-10 w-10 rounded-full bg-pink-100 flex items-center justify-center">
+                            <i class="fas fa-question text-pink-500"></i>
                         </div>
                     </div>
                     <div class="flex-1 min-w-0">
@@ -33,13 +33,13 @@
                         <textarea 
                             id="question" 
                             rows="3" 
-                            class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 border" 
-                            placeholder="เช่น: การหย่าต้องทำอย่างไร? หรือ กฎหมายแรงงานมีอะไรบ้าง?..."></textarea>
+                            class="shadow-sm focus:ring-pink-500 focus:border-pink-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 border" 
+                            placeholder="เช่น: การจดทะเบียนสมรสต้องทำอย่างไร? หรือ การรับรองบุตรต้องมีเงื่อนไขอย่างไร?..."></textarea>
                         <div class="mt-3 sm:mt-4 flex justify-end">
                             <button 
                                 onclick="askQuestion()" 
                                 id="ask-button"
-                                class="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                                class="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 transition-colors duration-200">
                                 <i class="fas fa-paper-plane mr-2"></i> ส่งคำถาม
                             </button>
                         </div>
@@ -51,13 +51,13 @@
             <div id="answer-container" class="p-4 sm:p-6 hidden">
                 <div class="flex items-start space-x-2 sm:space-x-3">
                     <div class="flex-shrink-0">
-                        <div class="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center">
-                            <i class="fas fa-gavel text-green-500"></i>
+                        <div class="h-10 w-10 rounded-full bg-pink-100 flex items-center justify-center">
+                            <i class="fas fa-gavel text-pink-500"></i>
                         </div>
                     </div>
                     <div class="flex-1 min-w-0">
                         <h3 class="text-lg font-medium text-gray-900 mb-2">คำตอบ:</h3>
-                        <div id="answer" class="answer-content bg-gray-50 p-4 rounded-md text-gray-800"></div>
+                        <div id="answer" class="answer-content bg-pink-50 p-4 rounded-md text-gray-800"></div>
                         <div id="loading" class="hidden mt-4">
                             <div class="flex items-center text-gray-500">
                                 <div class="typing-indicator mr-2"></div>
@@ -69,20 +69,32 @@
             </div>
 
             <!-- Sample Questions -->
-            <div class="bg-gray-50 p-4 sm:p-6">
+            <div class="bg-pink-50 p-4 sm:p-6">
                 <h3 class="text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider mb-3">คำถามตัวอย่าง</h3>
                 <div class="grid grid-cols-1 gap-2 sm:gap-3">
-                    <button onclick="fillQuestion(this)" class="text-left px-3 py-2 bg-white rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 border border-gray-200 transition-colors duration-150">
-                        <i class="fas fa-home mr-2 text-blue-400"></i> การซื้อขายที่ดินต้องทำอย่างไร?
+                    <button onclick="fillQuestion(this)" class="text-left px-3 py-2 bg-white rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-pink-50 border border-pink-200 transition-colors duration-150">
+                        <i class="fas fa-heart mr-2 text-pink-400"></i> การจดทะเบียนสมรสต้องมีเงื่อนไขอย่างไร?
                     </button>
-                    <button onclick="fillQuestion(this)" class="text-left px-3 py-2 bg-white rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 border border-gray-200 transition-colors duration-150">
-                        <i class="fas fa-user-tie mr-2 text-blue-400"></i> สิทธิของลูกจ้างมีอะไรบ้าง?
+                    <button onclick="fillQuestion(this)" class="text-left px-3 py-2 bg-white rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-pink-50 border border-pink-200 transition-colors duration-150">
+                        <i class="fas fa-baby mr-2 text-pink-400"></i> การรับรองบุตรต้องทำอย่างไร?
                     </button>
-                    <button onclick="fillQuestion(this)" class="text-left px-3 py-2 bg-white rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 border border-gray-200 transition-colors duration-150">
-                        <i class="fas fa-car mr-2 text-blue-400"></i> กฎหมายจราจรที่ควรรู้มีอะไรบ้าง?
+                    <button onclick="fillQuestion(this)" class="text-left px-3 py-2 bg-white rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-pink-50 border border-pink-200 transition-colors duration-150">
+                        <i class="fas fa-users mr-2 text-pink-400"></i> การหย่าต้องทำขั้นตอนอย่างไร?
                     </button>
-                    <button onclick="fillQuestion(this)" class="text-left px-3 py-2 bg-white rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 border border-gray-200 transition-colors duration-150">
-                        <i class="fas fa-heart mr-2 text-blue-400"></i> การทำพินัยกรรมต้องทำอย่างไร?
+                    <button onclick="fillQuestion(this)" class="text-left px-3 py-2 bg-white rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-pink-50 border border-pink-200 transition-colors duration-150">
+                        <i class="fas fa-piggy-bank mr-2 text-pink-400"></i> สิทธิในทรัพย์สินของคู่สมรสเป็นอย่างไร?
+                    </button>
+                    <button onclick="fillQuestion(this)" class="text-left px-3 py-2 bg-white rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-pink-50 border border-pink-200 transition-colors duration-150">
+                        <i class="fas fa-file-contract mr-2 text-pink-400"></i> การทำพินัยกรรมต้องมีเงื่อนไขอย่างไร?
+                    </button>
+                    <button onclick="fillQuestion(this)" class="text-left px-3 py-2 bg-white rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-pink-50 border border-pink-200 transition-colors duration-150">
+                        <i class="fas fa-handshake mr-2 text-pink-400"></i> สิทธิและหน้าที่ของบิดามารดาต่อบุตรมีอะไรบ้าง?
+                    </button>
+                    <button onclick="fillQuestion(this)" class="text-left px-3 py-2 bg-white rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-pink-50 border border-pink-200 transition-colors duration-150">
+                        <i class="fas fa-home mr-2 text-pink-400"></i> การขอแยกทรัพย์สินต้องทำอย่างไร?
+                    </button>
+                    <button onclick="fillQuestion(this)" class="text-left px-3 py-2 bg-white rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-pink-50 border border-pink-200 transition-colors duration-150">
+                        <i class="fas fa-shield-alt mr-2 text-pink-400"></i> การขอคุ้มครองจากความรุนแรงในครอบครัวต้องทำอย่างไร?
                     </button>
                 </div>
             </div>
@@ -118,8 +130,8 @@
             // Show loading state
             askButton.disabled = true;
             askButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> กำลังประมวลผล';
-            askButton.classList.remove('bg-blue-600', 'hover:bg-blue-700');
-            askButton.classList.add('bg-blue-400');
+            askButton.classList.remove('bg-pink-600', 'hover:bg-pink-700');
+            askButton.classList.add('bg-pink-400');
             
             answerContainer.classList.remove('hidden');
             answerDiv.innerHTML = '';
@@ -153,8 +165,8 @@
                 // Reset button state
                 askButton.disabled = false;
                 askButton.innerHTML = '<i class="fas fa-paper-plane mr-2"></i> ส่งคำถาม';
-                askButton.classList.remove('bg-blue-400');
-                askButton.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                askButton.classList.remove('bg-pink-400');
+                askButton.classList.add('bg-pink-600', 'hover:bg-pink-700');
             }
         }
 
@@ -173,10 +185,10 @@
         @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
         body {
             font-family: 'Sarabun', sans-serif;
-            background-color: #f8fafc;
+            background-color: #fdf2f8;
         }
         .legal-icon {
-            color: #3b82f6;
+            color: #ec4899;
         }
         .answer-content {
             white-space: pre-wrap;
